@@ -15,33 +15,44 @@ class ClientAdmin(admin.ModelAdmin):
 class ModuleAdmin(admin.ModelAdmin):
 	pass
 
+class WorkerAdmin(admin.ModelAdmin):
+	list_display = ('name',)
+
+class TaskAdmin(admin.ModelAdmin):
+	list_display = ('task_id', 'task_type')
+
 class UserAdmin(BaseUserAdmin):
 	fieldsets = BaseUserAdmin.fieldsets
 	fieldsets += (
-	('Minerva', {'fields':['clients','activeClient', 'datos_conductor', 'correo', 'profesion', 'interes', 'fumador', 'foto', 'viajes', 'trayectos']}),
+	('Minerva', {'fields':['clients','activeClient', 'datos_conductor', 'correo', 'profesion', 'interes', 'fumador', 'foto', 'viajes']}),
 	)
 
 class ConductorAdmin(admin.ModelAdmin):
 	list_display = ('licencia', 'fecha_obtencion')
 
 class ViajeAdmin(admin.ModelAdmin):
-	list_display = ('tarifaPreferencias', )
+	list_display = ('id_viaje', 'tarifaPreferencias')
 
 class ParadaAdmin(admin.ModelAdmin):
-	list_display = ('nombre', 'coordenada_x', 'coordenada_y')
+	list_display = ('nombre', 'id_parada', 'coordenada_x', 'coordenada_y')
 
 class TrayectoAdmin(admin.ModelAdmin):
-	list_display = ('precio',)
+	list_display = ('id_trayecto', 'precio')
 
 class PlazaAdmin(admin.ModelAdmin):
-	list_display = ('posicion',)
+	list_display = ('id_plaza', 'posicion')
 
+class DemoAdmin(admin.ModelAdmin):
+	list_display = ('id_plaza',)
 
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Module, ModuleAdmin)
 admin.site.register(User, UserAdmin)
+admin.site.register(Worker, WorkerAdmin)
+admin.site.register(Task, TaskAdmin)
 admin.site.register(Conductor, ConductorAdmin)
 admin.site.register(Viaje, ViajeAdmin)
 admin.site.register(Parada, ParadaAdmin)
 admin.site.register(Trayecto, TrayectoAdmin)
 admin.site.register(Plaza, PlazaAdmin)
+admin.site.register(Demo, DemoAdmin)
